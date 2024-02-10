@@ -1,0 +1,162 @@
+<div class="container-fluid">
+    <div class="block-header">
+        <h2>DASHBOARD <small>Data diperbarui setiap 30 menit.</small></h2>
+    </div>
+    <!-- Widget -->
+    <div class="row clearfix">
+        <div class="col-lg-3 col-md-3">
+            <div class="info-box bg-pink hover-expand-effect">
+                <div class="icon">
+                    <i class="material-icons">contact_support</i>
+                </div>
+                <div class="content">
+                    <div class="text">TOTAL PERTANYAAN</div>
+                    <div class="number count-to" data-from="0" data-to="{{CONFIG total_questions}}" data-speed="1000" data-fresh-interval="20"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box bg-light-green hover-expand-effect">
+                <div class="icon">
+                    <i class="material-icons">feedback</i>
+                </div>
+                <div class="content">
+                    <div class="text">TOTAL PERTANYAAN ANONIM</div>
+                    <div class="number count-to" data-from="0" data-to="{{CONFIG total_anon_questions}}" data-speed="1000" data-fresh-interval="20"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box bg-orange hover-expand-effect">
+                <div class="icon">
+                    <i class="material-icons">help</i>
+                </div>
+                <div class="content">
+                    <div class="text">TOTAL PERTANYAAN PUBLIK</div>
+                    <div class="number count-to" data-from="0" data-to="{{CONFIG total_non_anon_questions}}" data-speed="1000" data-fresh-interval="20"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box bg-cyan hover-expand-effect">
+                <div class="icon">
+                    <i class="material-icons">done_all</i>
+                </div>
+                <div class="content">
+                    <div class="text">TOTAL JAWABAN</div>
+                    <div class="number count-to" data-from="0" data-to="{{CONFIG total_answers}}" data-speed="1000" data-fresh-interval="20"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box bg-purple hover-expand-effect">
+                <div class="icon">
+                    <i class="material-icons">record_voice_over</i>
+                </div>
+                <div class="content">
+                    <div class="text">TOTAL BAGIKAN PERTANYAAN</div>
+                    <div class="number count-to" data-from="0" data-to="{{CONFIG total_shares}}" data-speed="1000" data-fresh-interval="20"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box bg-blue hover-expand-effect">
+                <div class="icon">
+                    <i class="material-icons">speaker_notes</i>
+                </div>
+                <div class="content">
+                    <div class="text">TOTAL BALASAN</div>
+                    <div class="number count-to" data-from="0" data-to="{{CONFIG total_replys}}" data-speed="1000" data-fresh-interval="20"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box bg-red hover-expand-effect">
+                <div class="icon">
+                    <i class="material-icons">supervised_user_circle</i>
+                </div>
+                <div class="content">
+                    <div class="text">TOTAL PENGGUNA AKTIF</div>
+                    <div class="number count-to" data-from="0" data-to="{{CONFIG total_active_users}}" data-speed="1000" data-fresh-interval="20"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box bg-indigo hover-expand-effect">
+                <div class="icon">
+                    <i class="material-icons">perm_identity</i>
+                </div>
+                <div class="content">
+                    <div class="text">TOTAL PENGGUNA TIDAK AKTIF</div>
+                    <div class="number count-to" data-from="0" data-to="{{CONFIG total_unactive_users}}" data-speed="1000" data-fresh-interval="20"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- #END# Widget -->
+    <div class="row clearfix">
+        <!-- Grafik Batang -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="header">
+                    <h2>STATISTIK PENGGUNA</h2>
+                </div>
+                <div class="body">
+                    <div id="bar_users_chart" class="graph"></div>
+                </div>
+            </div>
+        </div>
+        <!-- #END# Grafik Batang -->
+        <!-- Grafik Batang -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="header">
+                    <h2>STATISTIK PERTANYAAN</h2>
+                </div>
+                <div class="body">
+                    <div id="bar_questions_chart" class="graph"></div>
+                </div>
+            </div>
+        </div>
+        <!-- #END# Grafik Batang -->
+    </div>
+</div>
+
+
+<script>    
+$(function() {
+    "use strict";
+    Morris.Bar({
+        // ID of the element in which to draw the chart.
+        element: 'bar_questions_chart',
+
+        // Chart data records -- each entry in this array corresponds to a point
+        // on the chart.
+        data: {{CONFIG questions_statics}},
+
+            xkey: 'month',
+            ykeys: ['new_questions'],
+            labels: ['Added Questions'],
+            pointSize: 1,
+            hideHover: 'auto',
+            resize: true,
+            barColors: ['#E91E63']
+    });
+    Morris.Bar({
+        // ID of the element in which to draw the chart.
+        element: 'bar_users_chart',
+
+        // Chart data records -- each entry in this array corresponds to a point
+        // on the chart.
+        data: {{CONFIG user_statics}},
+
+            xkey: 'month',
+            ykeys: ['new_users'],
+            labels: ['New Users'],
+            pointSize: 1,
+            hideHover: 'auto',
+            resize: true,
+            barColors: ['#8BC34A']
+    });
+});
+</script>
